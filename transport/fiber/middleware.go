@@ -85,12 +85,3 @@ func NewDefaultContentTypeMiddleware(contentType string) fiber.Handler {
 		}
 	}
 }
-
-func GetUserClaims(c *fiber.Ctx) (*auth.UserClaims, error) {
-	token := jwtware.FromContext(c)
-	claims, ok := token.Claims.(*auth.UserClaims)
-	if !ok {
-		return nil, ErrorMissingTokenClaims
-	}
-	return claims, nil
-}
