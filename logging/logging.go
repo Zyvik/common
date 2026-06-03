@@ -15,8 +15,8 @@ const (
 )
 
 type Config struct {
-	Level      string
-	OutputFile string
+	Level      string `env:"LEVEL,required"`
+	OutputFile string `env:"OUTPUT_FILE"`
 }
 
 func InitLogger(cfg *Config) *logrus.Logger {

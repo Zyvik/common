@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/Zyvik/common/auth"
+	"github.com/Zyvik/common/context"
 	"github.com/Zyvik/common/logging"
 
 	jwtware "github.com/gofiber/contrib/v3/jwt"
@@ -13,8 +14,8 @@ import (
 )
 
 const (
-	TraceIDHeader = "TraceID"
-	SpanIDHeader  = "SpanID"
+	TraceIDHeader = "Trace-Id"
+	SpanIDHeader  = "Span-Id"
 )
 
 // NewLoggingMiddleware adds a logger and tracing data into the context for later use.
@@ -32,6 +33,9 @@ func NewLoggingMiddleware(log *logrus.Logger) fiber.Handler {
 			spanID = c.GetHeaders()[SpanIDHeader][0]
 		}
 		ctx = logging.AddTracingToContext(ctx, traceID, spanID)
+
+		c.Set(TraceIDHeader, context.GetString(ctx, logging.TraceIDCtxKey))
+		c.Set(SpanIDHeader, context.GetString(ctx, logging.SpanIDCtxKey))
 		c.SetContext(ctx)
 
 		middlewareLog := logging.GetTracedEntry(ctx).WithFields(logrus.Fields{

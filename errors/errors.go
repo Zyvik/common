@@ -18,7 +18,11 @@ func (se ServerError) Error() string {
 }
 
 // ValidationErrosToErrorResponse converts ValidationErrors into the ServerError
-func ValidationErrosToServerError(valErr validator.ValidationErrors, traceID string) *ServerError {
+func ValidationErrosToServerError(err error) error {
+	valErr, ok := err.(validator.ValidationErrors)
+	if !ok {
+		return err
+	}
 	errorMessage := "Request validation failed because of the following fields: "
 	fieldErrMsgs := make([]string, len(valErr))
 	for i, err := range valErr { // TODO - add more info
@@ -28,8 +32,8 @@ func ValidationErrosToServerError(valErr validator.ValidationErrors, traceID str
 	}
 	errorMessage += strings.Join(fieldErrMsgs, ", ")
 
-	return &ServerError{
-		ErrorCode:    "AUTH-VALIDATION",
+	return ServerError{
+		ErrorCode:    "VALIDATION",
 		ErrorMessage: errorMessage,
 	}
 }
