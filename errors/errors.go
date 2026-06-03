@@ -23,6 +23,7 @@ func ValidationErrosToServerError(err error) error {
 	if !ok {
 		return err
 	}
+
 	errorMessage := "Request validation failed because of the following fields: "
 	fieldErrMsgs := make([]string, len(valErr))
 	for i, err := range valErr { // TODO - add more info
