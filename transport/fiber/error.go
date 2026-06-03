@@ -1,6 +1,6 @@
 package fiber
 
-import "common/errors"
+import "github.com/Zyvik/common/errors"
 
 var (
 	ErrorMissingTokenClaims = errors.ServerError{

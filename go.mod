@@ -1,4 +1,4 @@
-module common
+module github.com/Zyvik/common
 
 go 1.26.3
 

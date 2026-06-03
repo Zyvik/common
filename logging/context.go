@@ -1,8 +1,9 @@
 package logging
 
 import (
-	commonCtx "common/context"
 	"context"
+
+	commonCtx "github.com/Zyvik/common/context"
 
 	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"

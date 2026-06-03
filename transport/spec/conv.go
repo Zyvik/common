@@ -1,6 +1,6 @@
 package spec
 
-import "common/errors"
+import "github.com/Zyvik/common/errors"
 
 // ErrToErrorResponse converts error to ErrorResponse
 func ErrToErrorResponse(err error) *ErrorResponse {

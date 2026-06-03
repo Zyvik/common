@@ -1,10 +1,11 @@
 package fiber
 
 import (
-	"common/auth"
-	"common/logging"
 	"crypto/ecdsa"
 	"time"
+
+	"github.com/Zyvik/common/auth"
+	"github.com/Zyvik/common/logging"
 
 	jwtware "github.com/gofiber/contrib/v3/jwt"
 	"github.com/gofiber/fiber/v3"
